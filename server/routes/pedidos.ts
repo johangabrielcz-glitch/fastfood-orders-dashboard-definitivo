@@ -53,7 +53,7 @@ export const createPedido: RequestHandler = (req, res) => {
 };
 
 // PATCH /api/pedidos/:id - Update pedido status
-export const updatePedido: RequestHandler = (req, res) => {
+export const updatePedido: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const { estado }: ActualizarPedidoRequest = req.body;
 
@@ -75,7 +75,27 @@ export const updatePedido: RequestHandler = (req, res) => {
     return;
   }
 
+  const estadoAnterior = pedido.estado;
   pedido.estado = estado;
+
+  // Send WhatsApp message when status changes
+  if (estadoAnterior !== estado) {
+    let mensaje = "";
+
+    if (estado === "en camino") {
+      mensaje = getMensajeEnCamino(pedido.nombre);
+    } else if (estado === "entregado") {
+      mensaje = getMensajeEntregado(pedido.nombre);
+    }
+
+    if (mensaje) {
+      await enviarMensajeBuilderBot(pedido.numero, mensaje).catch(
+        (error) => {
+          console.error("Error sending WhatsApp message:", error);
+        }
+      );
+    }
+  }
 
   res.json({
     ok: true,
