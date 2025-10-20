@@ -5,6 +5,11 @@ import {
   ActualizarPedidoRequest,
   ApiResponse,
 } from "@shared/api";
+import {
+  enviarMensajeBuilderBot,
+  getMensajeEnCamino,
+  getMensajeEntregado,
+} from "../utils/builderbot";
 
 // In-memory storage for pedidos
 let pedidos: Pedido[] = [];
