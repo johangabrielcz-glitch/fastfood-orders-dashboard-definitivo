@@ -29,9 +29,7 @@ export default function Index() {
       setLastRefresh(new Date());
     } catch (err) {
       console.error("Error fetching pedidos:", err);
-      setError(
-        err instanceof Error ? err.message : "Error fetching pedidos"
-      );
+      setError(err instanceof Error ? err.message : "Error fetching pedidos");
     } finally {
       setIsLoading(false);
     }
@@ -60,20 +58,14 @@ export default function Index() {
 
         // Update local state with the new pedido data
         setPedidos((prev) =>
-          prev.map((p) =>
-            p.id === pedidoId ? updatedPedido.data : p
-          )
+          prev.map((p) => (p.id === pedidoId ? updatedPedido.data : p)),
         );
       } catch (err) {
         console.error("Error updating pedido:", err);
-        setError(
-          err instanceof Error
-            ? err.message
-            : "Error updating pedido"
-        );
+        setError(err instanceof Error ? err.message : "Error updating pedido");
       }
     },
-    []
+    [],
   );
 
   // Initial fetch on component mount
@@ -119,7 +111,9 @@ export default function Index() {
             disabled={isLoading}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium text-sm"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+            <RefreshCw
+              className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`}
+            />
             Actualizar
           </button>
         </div>

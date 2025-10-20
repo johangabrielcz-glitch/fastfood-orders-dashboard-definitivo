@@ -25,14 +25,14 @@ export interface BuilderBotResponse {
  */
 export async function enviarMensajeBuilderBot(
   numero: string,
-  mensaje: string
+  mensaje: string,
 ): Promise<BuilderBotResponse> {
   const botId = process.env.BUILDERBOT_BOT_ID;
   const apiKey = process.env.BUILDERBOT_API_KEY;
 
   if (!botId || !apiKey) {
     console.error(
-      "BuilderBot credentials not configured in environment variables"
+      "BuilderBot credentials not configured in environment variables",
     );
     return {
       ok: false,
@@ -58,14 +58,12 @@ export async function enviarMensajeBuilderBot(
           "x-api-builderbot": apiKey,
         },
         body: JSON.stringify(payload),
-      }
+      },
     );
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(
-        `BuilderBot API error: ${response.status} - ${errorText}`
-      );
+      console.error(`BuilderBot API error: ${response.status} - ${errorText}`);
       return {
         ok: false,
         status: response.status,

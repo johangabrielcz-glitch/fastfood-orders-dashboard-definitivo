@@ -89,11 +89,9 @@ export const updatePedido: RequestHandler = async (req, res) => {
     }
 
     if (mensaje) {
-      await enviarMensajeBuilderBot(pedido.numero, mensaje).catch(
-        (error) => {
-          console.error("Error sending WhatsApp message:", error);
-        }
-      );
+      await enviarMensajeBuilderBot(pedido.numero, mensaje).catch((error) => {
+        console.error("Error sending WhatsApp message:", error);
+      });
     }
   }
 

@@ -4,7 +4,10 @@ import { AlertCircle } from "lucide-react";
 
 interface PedidoTableProps {
   pedidos: Pedido[];
-  onStatusChange: (pedidoId: number, nuevoEstado: "en camino" | "entregado") => Promise<void>;
+  onStatusChange: (
+    pedidoId: number,
+    nuevoEstado: "en camino" | "entregado",
+  ) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -67,7 +70,8 @@ export function PedidoTable({
         </table>
       </div>
       <div className="bg-gray-50 border-t border-gray-200 px-6 py-3 text-sm text-gray-600">
-        Total de pedidos: <span className="font-semibold">{pedidos.length}</span>
+        Total de pedidos:{" "}
+        <span className="font-semibold">{pedidos.length}</span>
       </div>
     </div>
   );
