@@ -2,6 +2,12 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  getPedidos,
+  createPedido,
+  updatePedido,
+  deletePedido,
+} from "./routes/pedidos";
 
 export function createServer() {
   const app = express();
@@ -18,6 +24,12 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Pedidos API routes
+  app.get("/api/pedidos", getPedidos);
+  app.post("/api/pedidos", createPedido);
+  app.patch("/api/pedidos/:id", updatePedido);
+  app.delete("/api/pedidos/:id", deletePedido);
 
   return app;
 }
