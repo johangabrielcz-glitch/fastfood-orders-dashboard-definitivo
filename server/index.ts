@@ -32,20 +32,20 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
-
   app.get("/api/pedidos", getPedidos);
   app.post("/api/pedidos", createPedido);
   app.patch("/api/pedidos/:id", updatePedido);
   app.delete("/api/pedidos/:id", deletePedido);
 
-  // In production, serve the SPA fallback for non-API routes
+  // ✅ Producción: servir frontend compilado
   if (process.env.NODE_ENV === "production") {
-    const distPath = path.join(__dirname, "../../dist/spa");
+    // En Vercel, la build final suele estar en /dist, no /dist/spa
+    const distPath = path.join(__dirname, "../../dist");
 
-    // Serve static files
+    // Archivos estáticos (JS, CSS, etc.)
     app.use(express.static(distPath));
 
-    // SPA fallback: serve index.html for all non-API routes
+    // Fallback SPA → index.html
     app.get(/.*/, (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
