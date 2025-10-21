@@ -5,9 +5,10 @@ import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  root: "./", // 👈 le dice a Vite que el index.html está en la raíz
+  root: "client", // 👈 usa la carpeta del frontend real
   build: {
-    outDir: "dist/spa",
+    outDir: "../dist/spa", // 👈 genera la build fuera del client
+    emptyOutDir: true, // limpia antes de construir
   },
   server: {
     host: "::",
