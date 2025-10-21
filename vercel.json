@@ -3,7 +3,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
   "installCommand": "pnpm install --frozen-lockfile",
-  "nodeVersion": "20.x",
   "env": {
     "BUILDERBOT_BOT_ID": "@builderbot_bot_id",
     "BUILDERBOT_API_KEY": "@builderbot_api_key"
