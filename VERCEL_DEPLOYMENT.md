@@ -24,6 +24,7 @@ vercel
 ```
 
 Follow the prompts:
+
 - Select your Git provider (GitHub)
 - Select your repository
 - Framework preset: Choose "Other" (already configured)
@@ -46,6 +47,7 @@ On Vercel, add these environment variables in **Project Settings → Environment
 - `BUILDERBOT_API_KEY`: Your BuilderBot Cloud API key (e.g., `bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb`)
 
 You can set these via CLI during deployment:
+
 ```bash
 vercel env add BUILDERBOT_BOT_ID
 vercel env add BUILDERBOT_API_KEY
@@ -97,6 +99,7 @@ All existing API endpoints work as-is:
 - `DELETE /api/pedidos/:id` - Delete order
 
 Example request from BuilderBot:
+
 ```bash
 curl -X POST https://YOUR_DOMAIN.vercel.app/api/pedidos \
   -H "Content-Type: application/json" \

@@ -17,6 +17,7 @@ This document details all Vercel-specific configurations in this project.
 ```
 
 **What it does:**
+
 - `version: 2` - Uses Vercel Builds V2 (latest)
 - `buildCommand` - Runs all builds (client + server)
 - `outputDirectory` - Serves `dist/spa/` as static files
@@ -36,6 +37,7 @@ export default serverlessHttp(app);
 ```
 
 **How it works:**
+
 - Imports Express app from `server/index.ts`
 - Wraps it with `serverless-http` to make it compatible with Vercel serverless functions
 - Exports default handler for all `/api/*` routes
@@ -54,6 +56,7 @@ export default serverlessHttp(app);
 ### `.vercelignore` (Optimization)
 
 Excludes unnecessary files from deployment:
+
 - `node_modules` - Reinstalled during build
 - `dist` - Rebuilt during deployment
 - `.git` - Not needed in production
@@ -96,12 +99,15 @@ vercel env add BUILDERBOT_API_KEY
 When you push to GitHub, Vercel:
 
 ### 1. Install Dependencies
+
 ```bash
 pnpm install --frozen-lockfile
 ```
+
 Ensures reproducible builds.
 
 ### 2. Build (npm run build)
+
 ```bash
 # Runs:
 npm run build:client    # Vite → dist/spa/
@@ -109,10 +115,12 @@ npm run build:server    # Vite server build (for local use)
 ```
 
 ### 3. Deploy
+
 - Frontend: `dist/spa/` files → Vercel CDN
 - API: `api/index.ts` → Vercel Serverless Function
 
 ### 4. Routing (vercel.json)
+
 ```
 /api/* → api/index.ts (serverless function)
 /*    → dist/spa/index.html (SPA)
@@ -197,6 +205,7 @@ npm run build:server    # Vite server build (for local use)
 ```
 
 **What it means:**
+
 - `memory: 1024` - 1GB RAM per function execution
 - `maxDuration: 30` - Max 30 seconds per request
 - `runtime: nodejs20.x` - Node.js 20.x runtime
@@ -229,29 +238,32 @@ Sets Environment Variables
 
 ## Local vs. Vercel Differences
 
-| Aspect | Local Development | Vercel Production |
-|--------|-------------------|-------------------|
-| Server | Express (Node.js) | Serverless Function |
-| Port | 8080 (dev), 3000 (prod) | Auto-managed |
-| Database | In-memory | In-memory (ephemeral) |
-| File System | Read/Write | Read-only |
-| Environment | `npm run dev` or `npm start` | Auto-deployed |
-| Environment Vars | `.env.local` | Vercel Dashboard |
+| Aspect           | Local Development            | Vercel Production     |
+| ---------------- | ---------------------------- | --------------------- |
+| Server           | Express (Node.js)            | Serverless Function   |
+| Port             | 8080 (dev), 3000 (prod)      | Auto-managed          |
+| Database         | In-memory                    | In-memory (ephemeral) |
+| File System      | Read/Write                   | Read-only             |
+| Environment      | `npm run dev` or `npm start` | Auto-deployed         |
+| Environment Vars | `.env.local`                 | Vercel Dashboard      |
 
 ## Scalability Considerations
 
 **Current Setup:**
+
 - ✅ Orders stored in-memory (reset on deployment)
 - ✅ No external database
 - ✅ Suitable for low-traffic (< 1000 requests/day)
 
 **For Production (When Scaling):**
+
 - Add database (Neon, Supabase, etc.)
 - Implement caching (Redis)
 - Add rate limiting
 - Monitor performance (Vercel Analytics)
 
 **To Add Database:**
+
 1. Provision database (e.g., Neon PostgreSQL)
 2. Update `server/routes/pedidos.ts` to use database instead of in-memory storage
 3. Add database connection string to environment variables
@@ -260,26 +272,31 @@ Sets Environment Variables
 ## Monitoring & Debugging
 
 ### View Deployment Status
+
 ```bash
 vercel status
 ```
 
 ### View Build Logs
+
 ```bash
 vercel logs
 ```
 
 ### View Real-time Logs
+
 ```bash
 vercel logs --follow
 ```
 
 ### Test API
+
 ```bash
 curl https://YOUR_PROJECT.vercel.app/api/pedidos
 ```
 
 ### Check Environment Variables
+
 ```bash
 vercel env list
 ```
@@ -287,25 +304,33 @@ vercel env list
 ## Common Vercel Issues & Solutions
 
 ### Issue: "Build timed out"
+
 **Solution:** Optimize build process or increase timeout in `vercel.json`:
+
 ```json
 { "buildCommand": "npm run build" }
 ```
 
 ### Issue: "Cannot find module"
+
 **Solution:** Ensure all dependencies in `package.json`:
+
 ```bash
 npm ls  # Check for missing deps
 ```
 
 ### Issue: "Environment variables not working"
-**Solution:** 
+
+**Solution:**
+
 - Set in Vercel Dashboard (not in code)
 - Redeploy after adding variables
 - Variable names are case-sensitive
 
 ### Issue: "API routes return 404"
-**Solution:** 
+
+**Solution:**
+
 - Verify `vercel.json` is in root directory
 - Check route pattern in `vercel.json` matches your endpoints
 - Verify TypeScript file in `api/` directory
@@ -350,6 +375,7 @@ vercel rollback DEPLOYMENT_ID
 ## Performance Metrics
 
 Vercel provides analytics:
+
 - Go to Project Dashboard
 - Click "Analytics"
 - Monitor:

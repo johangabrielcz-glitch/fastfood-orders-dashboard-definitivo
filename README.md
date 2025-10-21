@@ -127,6 +127,7 @@ fastfoodbot-dashboard/
 ## 🚀 Features
 
 ### Dashboard UI
+
 - ✅ **Real-time updates** - Auto-refresh every 7 seconds
 - ✅ **Status cards** - Pending, in transit, delivered counts
 - ✅ **Order table** - All orders with sortable columns
@@ -136,6 +137,7 @@ fastfoodbot-dashboard/
 - ✅ **Responsive design** - Works on desktop, tablet, mobile
 
 ### Backend API
+
 - ✅ **POST /api/pedidos** - Receive orders from BuilderBot
 - ✅ **GET /api/pedidos** - Retrieve all orders
 - ✅ **PATCH /api/pedidos/:id** - Update order status
@@ -144,12 +146,14 @@ fastfoodbot-dashboard/
 - ✅ **Type safety** - Full TypeScript support
 
 ### WhatsApp Integration
+
 - ✅ **Automatic messages** - Sent when status changes
 - ✅ **Personalized** - Includes customer name
 - ✅ **Templates** - Pre-written messages with emojis
 - ✅ **BuilderBot API** - Uses official BuilderBot Cloud API
 
 ### Deployment
+
 - ✅ **Vercel optimized** - Serverless functions ready
 - ✅ **Production build** - Optimized bundles
 - ✅ **Environment variables** - Secure configuration
@@ -159,33 +163,33 @@ fastfoodbot-dashboard/
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| **Frontend** | React | 18.3 |
-| **Routing** | React Router | 6.30 |
-| **Styling** | Tailwind CSS | 3.4 |
-| **Components** | Radix UI | Latest |
-| **Icons** | Lucide React | 0.539 |
-| **Forms** | React Hook Form | 7.62 |
-| **State** | React Hooks | Built-in |
-| | TanStack Query | 5.84 |
-| **Backend** | Express | 5.1 |
-| **Validation** | Zod | 3.25 |
-| **Build** | Vite | 7.1 |
-| **Testing** | Vitest | 3.2 |
-| **Package Manager** | pnpm | 10.14 |
-| **Runtime** | Node.js | 20.x |
-| **Deployment** | Vercel | Latest |
+| Layer               | Technology      | Version  |
+| ------------------- | --------------- | -------- |
+| **Frontend**        | React           | 18.3     |
+| **Routing**         | React Router    | 6.30     |
+| **Styling**         | Tailwind CSS    | 3.4      |
+| **Components**      | Radix UI        | Latest   |
+| **Icons**           | Lucide React    | 0.539    |
+| **Forms**           | React Hook Form | 7.62     |
+| **State**           | React Hooks     | Built-in |
+|                     | TanStack Query  | 5.84     |
+| **Backend**         | Express         | 5.1      |
+| **Validation**      | Zod             | 3.25     |
+| **Build**           | Vite            | 7.1      |
+| **Testing**         | Vitest          | 3.2      |
+| **Package Manager** | pnpm            | 10.14    |
+| **Runtime**         | Node.js         | 20.x     |
+| **Deployment**      | Vercel          | Latest   |
 
 ## 📖 Documentation
 
-| Document | Purpose |
-|----------|---------|
-| [QUICK_START.md](./QUICK_START.md) | 5-minute deploy guide for Vercel |
-| [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) | Comprehensive Vercel setup guide |
-| [VERCEL_CONFIG.md](./VERCEL_CONFIG.md) | Detailed configuration documentation |
+| Document                                             | Purpose                                    |
+| ---------------------------------------------------- | ------------------------------------------ |
+| [QUICK_START.md](./QUICK_START.md)                   | 5-minute deploy guide for Vercel           |
+| [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)       | Comprehensive Vercel setup guide           |
+| [VERCEL_CONFIG.md](./VERCEL_CONFIG.md)               | Detailed configuration documentation       |
 | [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) | Step-by-step pre/post deployment checklist |
-| [server/README.md](./server/README.md) | API endpoints documentation |
+| [server/README.md](./server/README.md)               | API endpoints documentation                |
 
 ## 🔐 Environment Variables
 
@@ -222,6 +226,7 @@ npm run format.fix       # Format code with Prettier
 All endpoints return JSON with `{ ok: boolean, mensaje?: string, data?: T }` format.
 
 ### GET /api/pedidos
+
 Get all orders.
 
 ```bash
@@ -229,6 +234,7 @@ curl http://localhost:8080/api/pedidos
 ```
 
 ### POST /api/pedidos
+
 Create new order (usually called by BuilderBot).
 
 ```bash
@@ -244,6 +250,7 @@ curl -X POST http://localhost:8080/api/pedidos \
 ```
 
 ### PATCH /api/pedidos/:id
+
 Update order status (triggers WhatsApp message).
 
 ```bash
@@ -253,6 +260,7 @@ curl -X PATCH http://localhost:8080/api/pedidos/101 \
 ```
 
 ### DELETE /api/pedidos/:id
+
 Delete order.
 
 ```bash
@@ -323,6 +331,7 @@ npm run dev
 ```
 
 Changes to files are automatically hot-reloaded:
+
 - React components reload instantly
 - API routes reload on save
 - Styles update without refresh
@@ -379,6 +388,7 @@ Vercel automatically deploys when you push to GitHub!
 ### Quick Deploy (3 steps)
 
 1. **Push to GitHub**
+
    ```bash
    git push origin main
    ```
@@ -398,11 +408,13 @@ Vercel automatically deploys when you push to GitHub!
 ## 📈 Scalability
 
 Current setup:
+
 - ✅ Handles 1000+ orders/day
 - ✅ Auto-scales with Vercel
 - ✅ Orders stored in-memory (ephemeral)
 
 For enterprise use:
+
 - Add PostgreSQL (Neon, Supabase)
 - Implement Redis caching
 - Add authentication/authorization
@@ -411,6 +423,7 @@ For enterprise use:
 ## 🆘 Troubleshooting
 
 ### Dev Server Won't Start
+
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules pnpm-lock.yaml
@@ -419,11 +432,13 @@ npm run dev
 ```
 
 ### API Returns 404
+
 - Check `vercel.json` is in root directory
 - Verify environment variables are set
 - Check endpoint paths in `server/routes/`
 
 ### Build Fails
+
 ```bash
 # Test locally
 npm run build
@@ -436,6 +451,7 @@ pnpm list
 ```
 
 ### WhatsApp Messages Not Sending
+
 - Verify credentials in environment variables
 - Check BuilderBot API status
 - Review server logs: `vercel logs`

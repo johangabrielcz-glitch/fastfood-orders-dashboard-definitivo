@@ -11,6 +11,7 @@ This file guides you through everything you need to know.
 If you just want to deploy right now:
 
 1. **Push to GitHub**
+
    ```bash
    git init
    git add .
@@ -41,20 +42,26 @@ If you just want to deploy right now:
 Read docs in this order based on your needs:
 
 ### 🏃 I Just Want to Deploy
+
 → Read: [QUICK_START.md](./QUICK_START.md) (5 min read)
+
 - 3-step deployment to Vercel
 - Environment variable setup
 - Quick testing
 
 ### 🎯 I Want to Understand Everything
+
 → Read: [CONFIGURATION_SUMMARY.md](./CONFIGURATION_SUMMARY.md) (10 min read)
+
 - What was configured for you
 - Project structure overview
 - Feature list
 - Deployment checklist
 
 ### 🔧 I Need Technical Details
+
 → Read: [VERCEL_CONFIG.md](./VERCEL_CONFIG.md) (15 min read)
+
 - vercel.json explained line-by-line
 - Build process details
 - Routing configuration
@@ -62,7 +69,9 @@ Read docs in this order based on your needs:
 - Troubleshooting
 
 ### 📋 I Want a Step-by-Step Checklist
+
 → Read: [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) (Pre-deployment)
+
 - Pre-deployment preparation
 - GitHub setup
 - Vercel connection
@@ -70,14 +79,18 @@ Read docs in this order based on your needs:
 - Post-deployment testing
 
 ### ✅ I Want to Verify Everything is Ready
+
 → Read: [VERCEL_READY_CHECKLIST.md](./VERCEL_READY_CHECKLIST.md)
+
 - File structure verification
 - Configuration verification
 - Pre-deployment tests
 - Post-deployment verification
 
 ### 📖 I Need Complete Documentation
+
 → Read: [README.md](./README.md)
+
 - Project overview
 - Features list
 - Architecture
@@ -85,7 +98,9 @@ Read docs in this order based on your needs:
 - Troubleshooting
 
 ### 💻 I'm a Developer, Show Me the API
+
 → Read: [server/README.md](./server/README.md)
+
 - API endpoints detailed
 - Request/response examples
 - BuilderBot integration
@@ -93,7 +108,9 @@ Read docs in this order based on your needs:
 - Status transitions
 
 ### 📘 Full Vercel Deployment Guide
+
 → Read: [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) (Most comprehensive)
+
 - Complete setup instructions
 - Local development
 - GitHub integration
@@ -107,12 +124,14 @@ Read docs in this order based on your needs:
 ## 🎯 What's Configured For You
 
 ### ✅ Backend API (Express)
+
 - **POST /api/pedidos** - Create orders from BuilderBot
 - **GET /api/pedidos** - Fetch all orders
 - **PATCH /api/pedidos/:id** - Update order status & send WhatsApp messages
 - **DELETE /api/pedidos/:id** - Remove orders
 
 ### ✅ Frontend Dashboard (React)
+
 - **Real-time display** of all orders
 - **Auto-refresh** every 7 seconds
 - **One-click status updates** (En camino / Entregado)
@@ -120,6 +139,7 @@ Read docs in this order based on your needs:
 - **Error handling** with helpful messages
 
 ### ✅ WhatsApp Integration (BuilderBot)
+
 - **Automatic messages** sent when status changes
 - **Personalized** with customer names
 - **Two templates**:
@@ -127,6 +147,7 @@ Read docs in this order based on your needs:
   - "🎉 Tu pedido ha sido entregado..."
 
 ### ✅ Vercel Deployment
+
 - **Zero-config deployment** (vercel.json handles everything)
 - **Serverless API** (auto-scaling)
 - **Static CDN** (fast frontend)
@@ -166,13 +187,16 @@ WhatsApp Bot (BuilderBot Cloud)
 ## 🔑 What You Need (Just 2 Things!)
 
 ### 1. BuilderBot Credentials
+
 ```
 BUILDERBOT_BOT_ID = 5d54ab94-3dae-4d5f-887e-0f3a2983c295
 BUILDERBOT_API_KEY = bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb
 ```
+
 (Already configured in this project)
 
 ### 2. GitHub Account
+
 → For pushing code and connecting to Vercel
 
 That's it! Everything else is already set up.
@@ -225,14 +249,14 @@ curl http://localhost:3000/api/pedidos
 
 ## 🚀 Deployment Timeline
 
-| Step | Time | What Happens |
-|------|------|--------------|
-| 1. Push to GitHub | 1 min | Git commits and pushes code |
-| 2. Vercel detects | Auto | Webhook triggers on push |
-| 3. Install deps | 1-2 min | `pnpm install` runs |
-| 4. Build | 1-2 min | `npm run build` creates dist/ |
-| 5. Deploy | 1 min | Upload to CDN and serverless |
-| 6. Live! | 5 min total | App is now live at vercel.app |
+| Step              | Time        | What Happens                  |
+| ----------------- | ----------- | ----------------------------- |
+| 1. Push to GitHub | 1 min       | Git commits and pushes code   |
+| 2. Vercel detects | Auto        | Webhook triggers on push      |
+| 3. Install deps   | 1-2 min     | `pnpm install` runs           |
+| 4. Build          | 1-2 min     | `npm run build` creates dist/ |
+| 5. Deploy         | 1 min       | Upload to CDN and serverless  |
+| 6. Live!          | 5 min total | App is now live at vercel.app |
 
 **Total: ~5 minutes from git push to live! ⚡**
 
@@ -241,6 +265,7 @@ curl http://localhost:3000/api/pedidos
 ## ✨ Features Your Dashboard Includes
 
 ### Dashboard View
+
 - 📊 Summary cards (Pending / In Transit / Delivered counts)
 - 📋 Real-time orders table
 - 🔄 Auto-refresh every 7 seconds
@@ -248,11 +273,13 @@ curl http://localhost:3000/api/pedidos
 - ⏰ Last update timestamp
 
 ### Order Management
+
 - 🟡 **Pendiente** (Pending) - Yellow badge
 - 🔵 **En camino** (In Transit) - Blue badge
 - 🟢 **Entregado** (Delivered) - Green badge
 
 ### Actions
+
 - 🚴 **En camino** button
   - Updates status
   - Sends WhatsApp message to customer
@@ -264,6 +291,7 @@ curl http://localhost:3000/api/pedidos
   - Shows success/error
 
 ### Security
+
 - 🔐 Secrets in environment variables (not in code)
 - 🔒 HTTPS enforced by Vercel
 - 🛡️ Validation on all inputs
@@ -299,33 +327,33 @@ A: Yes! Run `npm run dev` then `npm run build && npm start`
 
 ### Files You Need to Know About
 
-| File | Purpose |
-|------|---------|
-| `vercel.json` | Vercel deployment config (auto-detected) |
-| `api/index.ts` | API entry point for Vercel serverless |
-| `.env.example` | Template for environment variables |
-| `package.json` | Build scripts and dependencies |
-| `vite.config.ts` | Frontend build configuration |
+| File             | Purpose                                  |
+| ---------------- | ---------------------------------------- |
+| `vercel.json`    | Vercel deployment config (auto-detected) |
+| `api/index.ts`   | API entry point for Vercel serverless    |
+| `.env.example`   | Template for environment variables       |
+| `package.json`   | Build scripts and dependencies           |
+| `vite.config.ts` | Frontend build configuration             |
 
 ### Important Directories
 
-| Directory | Purpose |
-|-----------|---------|
-| `client/` | React SPA (frontend) |
-| `server/` | Express app (backend) |
-| `api/` | Vercel serverless function |
-| `shared/` | Shared types |
-| `dist/` | Built output (after `npm run build`) |
+| Directory | Purpose                              |
+| --------- | ------------------------------------ |
+| `client/` | React SPA (frontend)                 |
+| `server/` | Express app (backend)                |
+| `api/`    | Vercel serverless function           |
+| `shared/` | Shared types                         |
+| `dist/`   | Built output (after `npm run build`) |
 
 ### Key Commands
 
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Start dev server (8080) |
-| `npm run build` | Build for production |
-| `npm start` | Run production build locally |
-| `vercel` | Deploy to Vercel |
-| `vercel logs` | View deployment logs |
+| Command         | Purpose                      |
+| --------------- | ---------------------------- |
+| `npm run dev`   | Start dev server (8080)      |
+| `npm run build` | Build for production         |
+| `npm start`     | Run production build locally |
+| `vercel`        | Deploy to Vercel             |
+| `vercel logs`   | View deployment logs         |
 
 ---
 
@@ -338,7 +366,7 @@ After deployment, you'll know everything works when:
 ✅ API responds: `curl https://YOUR-PROJECT.vercel.app/api/pedidos`  
 ✅ Order appears when BuilderBot sends one  
 ✅ Clicking "En camino" sends WhatsApp message  
-✅ Clicking "Entregado" sends final message  
+✅ Clicking "Entregado" sends final message
 
 ---
 
@@ -387,7 +415,7 @@ Everything is set up. No manual configuration needed.
 
 ## 🎉 Let's Deploy!
 
-**Ready to go live?** 
+**Ready to go live?**
 
 → Open [QUICK_START.md](./QUICK_START.md) and follow the 5-minute guide.
 

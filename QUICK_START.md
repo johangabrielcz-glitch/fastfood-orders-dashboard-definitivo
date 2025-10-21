@@ -28,12 +28,14 @@ git push -u origin main
 ### Step 2: Deploy to Vercel (2 minutes)
 
 **Option A: Vercel CLI**
+
 ```bash
 npm i -g vercel
 vercel
 ```
 
 **Option B: Vercel Dashboard**
+
 1. Go to https://vercel.com/new
 2. Click "Add New..." → "Project"
 3. Select your GitHub repository
@@ -44,6 +46,7 @@ vercel
 On Vercel Dashboard → Project Settings → Environment Variables
 
 Add:
+
 - `BUILDERBOT_BOT_ID`: `5d54ab94-3dae-4d5f-887e-0f3a2983c295`
 - `BUILDERBOT_API_KEY`: `bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb`
 
@@ -80,38 +83,43 @@ curl -X POST https://YOUR_PROJECT.vercel.app/api/pedidos \
 ## 🔄 What's Configured
 
 ✅ **Frontend**
+
 - React SPA with React Router
 - Builds to `dist/spa/`
 - Automatically served at `/`
 
 ✅ **Backend API**
+
 - Express server wrapped with `serverless-http`
 - All `/api/*` routes handled automatically
 - WhatsApp integration with BuilderBot
 
 ✅ **Build Process**
+
 - `npm run build` creates all necessary files
 - Vite handles frontend, server, and API builds
 - No manual configuration needed
 
 ✅ **Routing**
+
 - `vercel.json` configures all routes
 - Static assets served with caching
 - SPA routes fallback to `index.html`
 - API routes go to serverless function
 
 ✅ **Environment Variables**
+
 - Safely configured in Vercel Dashboard
 - Never committed to git
 - Available in both frontend and backend
 
 ## 🆘 Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| Build fails | Run `npm run build` locally to debug |
-| API returns 404 | Check environment variables are set |
-| Frontend not loading | Verify `vercel.json` is in root |
+| Issue                         | Solution                                       |
+| ----------------------------- | ---------------------------------------------- |
+| Build fails                   | Run `npm run build` locally to debug           |
+| API returns 404               | Check environment variables are set            |
+| Frontend not loading          | Verify `vercel.json` is in root                |
 | WhatsApp messages not sending | Check credentials and BuilderBot configuration |
 
 ## 🎛️ Local Development

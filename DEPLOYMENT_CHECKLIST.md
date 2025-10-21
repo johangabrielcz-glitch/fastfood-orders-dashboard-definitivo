@@ -5,14 +5,17 @@ Complete this checklist to deploy your application to Vercel.
 ## ✅ Pre-Deployment
 
 - [ ] **Verify local build works**
+
   ```bash
   pnpm install
   pnpm build
   pnpm start
   ```
+
   Test at `http://localhost:3000`
 
 - [ ] **Test API endpoints locally**
+
   ```bash
   # In another terminal while `pnpm start` is running
   curl http://localhost:3000/api/pedidos
@@ -39,6 +42,7 @@ Complete this checklist to deploy your application to Vercel.
   - Do NOT initialize with README, .gitignore, or license (we have them)
 
 - [ ] **Push to GitHub**
+
   ```bash
   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
   git branch -M main
@@ -55,14 +59,17 @@ Complete this checklist to deploy your application to Vercel.
 ### Option A: Using Vercel CLI (Recommended)
 
 - [ ] **Install Vercel CLI**
+
   ```bash
   npm install -g vercel
   ```
 
 - [ ] **Login to Vercel**
+
   ```bash
   vercel login
   ```
+
   Creates `.vercel/` folder (DO NOT commit this)
 
 - [ ] **Deploy**
@@ -74,7 +81,7 @@ Complete this checklist to deploy your application to Vercel.
 ### Option B: Using Vercel Dashboard
 
 - [ ] **Go to Vercel Dashboard**
-  Navigate to https://vercel.com/new
+      Navigate to https://vercel.com/new
 
 - [ ] **Import from Git**
   - Select your GitHub account
@@ -109,6 +116,7 @@ On Vercel Dashboard → Project Settings → Environment Variables
   - [ ] Check dashboard displays correctly
 
 - [ ] **Test API endpoints**
+
   ```bash
   # Get all orders (should be empty)
   curl https://YOUR_DOMAIN.vercel.app/api/pedidos
@@ -134,7 +142,7 @@ On Vercel Dashboard → Project Settings → Environment Variables
     -H "Content-Type: application/json" \
     -d '{"estado": "en camino"}'
   ```
-  *Check WhatsApp message is sent to the number*
+  _Check WhatsApp message is sent to the number_
 
 ## 🔗 BuilderBot Integration
 
@@ -200,21 +208,25 @@ vercel rollback
 ## 🆘 Troubleshooting
 
 ### Deployment failed
+
 - [ ] Check build logs in Vercel Dashboard
 - [ ] Verify all dependencies in `package.json`
 - [ ] Run `pnpm build` locally to test
 
 ### API routes return 404
+
 - [ ] Check `vercel.json` is in root directory
 - [ ] Verify environment variables are set
 - [ ] Check `/api/*` routes in `vercel.json`
 
 ### Environment variables not working
+
 - [ ] Verify variable names match exactly (case-sensitive)
 - [ ] Redeploy after adding variables
 - [ ] Check variables are set for Production environment
 
 ### Frontend returns 404
+
 - [ ] Check `dist/spa/index.html` exists after build
 - [ ] Verify `outputDirectory` in `vercel.json` is correct
 - [ ] Check SPA rewrite rule in `vercel.json`

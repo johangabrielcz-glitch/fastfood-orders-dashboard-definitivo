@@ -17,13 +17,13 @@ This API doesn't require authentication. In production, you should add authentic
 
 ```typescript
 interface Pedido {
-  id: number;              // Unique order ID
-  nombre: string;          // Customer name
-  numero: string;          // WhatsApp number (e.g., "584124779301")
-  pedido: string;          // Order items description
-  total: number;           // Order total (currency amount)
-  estado: EstadoPedido;    // Order status
-  createdAt?: string;      // ISO timestamp
+  id: number; // Unique order ID
+  nombre: string; // Customer name
+  numero: string; // WhatsApp number (e.g., "584124779301")
+  pedido: string; // Order items description
+  total: number; // Order total (currency amount)
+  estado: EstadoPedido; // Order status
+  createdAt?: string; // ISO timestamp
 }
 
 type EstadoPedido = "pendiente" | "en camino" | "entregado";
@@ -36,6 +36,7 @@ type EstadoPedido = "pendiente" | "en camino" | "entregado";
 Get all orders.
 
 **Response:**
+
 ```json
 [
   {
@@ -60,6 +61,7 @@ Get all orders.
 ```
 
 **Example:**
+
 ```bash
 curl http://localhost:8080/api/pedidos
 ```
@@ -71,6 +73,7 @@ curl http://localhost:8080/api/pedidos
 Create a new order. Typically called by BuilderBot when a customer places an order via WhatsApp.
 
 **Request Body:**
+
 ```json
 {
   "id": 103,
@@ -78,11 +81,12 @@ Create a new order. Typically called by BuilderBot when a customer places an ord
   "numero": "584126666666",
   "pedido": "3x Hamburguesas + Refresco x3",
   "total": 150,
-  "estado": "pendiente"  // Optional, defaults to "pendiente"
+  "estado": "pendiente" // Optional, defaults to "pendiente"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -100,6 +104,7 @@ Create a new order. Typically called by BuilderBot when a customer places an ord
 ```
 
 **Example:**
+
 ```bash
 curl -X POST http://localhost:8080/api/pedidos \
   -H "Content-Type: application/json" \
@@ -113,6 +118,7 @@ curl -X POST http://localhost:8080/api/pedidos \
 ```
 
 **Error Response (400 - Bad Request):**
+
 ```json
 {
   "ok": false,
@@ -127,9 +133,11 @@ curl -X POST http://localhost:8080/api/pedidos \
 Update order status. When status changes, automatically sends a WhatsApp message to the customer via BuilderBot API.
 
 **Request Parameters:**
+
 - `id` (path) - Order ID to update
 
 **Request Body:**
+
 ```json
 {
   "estado": "en camino"
@@ -137,11 +145,13 @@ Update order status. When status changes, automatically sends a WhatsApp message
 ```
 
 **Valid States:**
+
 - `"pendiente"` - New order received
 - `"en camino"` - Order is being delivered
 - `"entregado"` - Order delivered
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -161,16 +171,19 @@ Update order status. When status changes, automatically sends a WhatsApp message
 **WhatsApp Messages Sent:**
 
 When `estado` → `"en camino"`:
+
 ```
 🚴‍♂️ ¡Hola María García! Tu pedido ya va en camino. Gracias por tu compra 🍔
 ```
 
 When `estado` → `"entregado"`:
+
 ```
 🎉 ¡Tu pedido ha sido entregado! Esperamos que lo hayas disfrutado 🍟
 ```
 
 **Example:**
+
 ```bash
 curl -X PATCH http://localhost:8080/api/pedidos/103 \
   -H "Content-Type: application/json" \
@@ -180,6 +193,7 @@ curl -X PATCH http://localhost:8080/api/pedidos/103 \
 **Error Responses:**
 
 400 - Bad Request (missing estado):
+
 ```json
 {
   "ok": false,
@@ -188,6 +202,7 @@ curl -X PATCH http://localhost:8080/api/pedidos/103 \
 ```
 
 404 - Not Found:
+
 ```json
 {
   "ok": false,
@@ -202,9 +217,11 @@ curl -X PATCH http://localhost:8080/api/pedidos/103 \
 Delete an order. (Optional endpoint, useful for cleanup)
 
 **Request Parameters:**
+
 - `id` (path) - Order ID to delete
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -222,6 +239,7 @@ Delete an order. (Optional endpoint, useful for cleanup)
 ```
 
 **Example:**
+
 ```bash
 curl -X DELETE http://localhost:8080/api/pedidos/103
 ```
@@ -270,15 +288,19 @@ pendiente → en camino → entregado
 All API responses follow a standard format:
 
 ### Success Response
+
 ```json
 {
   "ok": true,
   "mensaje": "Description of what happened",
-  "data": { /* response data */ }
+  "data": {
+    /* response data */
+  }
 }
 ```
 
 ### Error Response
+
 ```json
 {
   "ok": false,
@@ -288,13 +310,13 @@ All API responses follow a standard format:
 
 ## HTTP Status Codes
 
-| Code | Meaning |
-|------|---------|
-| 200  | OK - Request succeeded |
-| 201  | Created - New resource created |
-| 400  | Bad Request - Invalid data |
+| Code | Meaning                            |
+| ---- | ---------------------------------- |
+| 200  | OK - Request succeeded             |
+| 201  | Created - New resource created     |
+| 400  | Bad Request - Invalid data         |
 | 404  | Not Found - Resource doesn't exist |
-| 500  | Server Error |
+| 500  | Server Error                       |
 
 ## Environment Variables
 
@@ -308,6 +330,7 @@ The API uses these environment variables:
 ## Rate Limiting
 
 Currently, there is no rate limiting. For production, consider adding:
+
 - IP-based rate limiting
 - Request validation
 - Authentication/API keys
@@ -325,6 +348,7 @@ Currently, there is no rate limiting. For production, consider adding:
 ### 1. Customer orders via WhatsApp bot
 
 BuilderBot sends:
+
 ```bash
 POST /api/pedidos
 {
@@ -343,6 +367,7 @@ Dashboard polls `GET /api/pedidos` every 7 seconds
 ### 3. Staff marks as "en camino"
 
 Dashboard sends:
+
 ```bash
 PATCH /api/pedidos/101
 { "estado": "en camino" }
@@ -353,6 +378,7 @@ Server sends WhatsApp: "🚴‍♂️ ¡Tu pedido va en camino!"
 ### 4. Staff marks as "entregado"
 
 Dashboard sends:
+
 ```bash
 PATCH /api/pedidos/101
 { "estado": "entregado" }
@@ -386,28 +412,28 @@ curl -X DELETE http://localhost:8080/api/pedidos/999
 
 ```javascript
 // Get orders
-const orders = await fetch('/api/pedidos').then(r => r.json());
+const orders = await fetch("/api/pedidos").then((r) => r.json());
 console.log(orders);
 
 // Create order
-const newOrder = await fetch('/api/pedidos', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const newOrder = await fetch("/api/pedidos", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     id: 999,
-    nombre: 'Test',
-    numero: '584124779301',
-    pedido: 'Test',
-    total: 99
-  })
-}).then(r => r.json());
+    nombre: "Test",
+    numero: "584124779301",
+    pedido: "Test",
+    total: 99,
+  }),
+}).then((r) => r.json());
 
 // Update order
-const updated = await fetch('/api/pedidos/999', {
-  method: 'PATCH',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ estado: 'en camino' })
-}).then(r => r.json());
+const updated = await fetch("/api/pedidos/999", {
+  method: "PATCH",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ estado: "en camino" }),
+}).then((r) => r.json());
 ```
 
 ---

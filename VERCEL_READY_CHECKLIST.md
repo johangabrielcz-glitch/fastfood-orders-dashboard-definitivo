@@ -193,6 +193,7 @@ This checklist verifies that your project is 100% ready for production deploymen
 Before pushing to GitHub:
 
 - [ ] **Local dev works**
+
   ```bash
   npm run dev
   # Check http://localhost:8080 loads
@@ -200,6 +201,7 @@ Before pushing to GitHub:
   ```
 
 - [ ] **Local build works**
+
   ```bash
   npm run build
   # Check dist/spa/ has index.html
@@ -207,6 +209,7 @@ Before pushing to GitHub:
   ```
 
 - [ ] **Production server works locally**
+
   ```bash
   npm run build
   npm start
@@ -215,6 +218,7 @@ Before pushing to GitHub:
   ```
 
 - [ ] **No TypeScript errors**
+
   ```bash
   npm run typecheck
   # Should complete without errors
@@ -228,6 +232,7 @@ Before pushing to GitHub:
 ## 📤 Push to GitHub
 
 - [ ] **Initialize git**
+
   ```bash
   git init
   git add .
@@ -240,6 +245,7 @@ Before pushing to GitHub:
   - DO NOT initialize with README
 
 - [ ] **Push to GitHub**
+
   ```bash
   git remote add origin https://github.com/YOUR_USERNAME/REPO.git
   git branch -M main
@@ -283,12 +289,14 @@ After deployment succeeds:
   - Check responsive on mobile
 
 - [ ] **Test API**
+
   ```bash
   curl https://YOUR_DOMAIN.vercel.app/api/pedidos
   # Should return empty array []
   ```
 
 - [ ] **Test order creation**
+
   ```bash
   curl -X POST https://YOUR_DOMAIN.vercel.app/api/pedidos \
     -H "Content-Type: application/json" \
@@ -297,6 +305,7 @@ After deployment succeeds:
   ```
 
 - [ ] **Test status update**
+
   ```bash
   curl -X PATCH https://YOUR_DOMAIN.vercel.app/api/pedidos/1 \
     -H "Content-Type: application/json" \
@@ -305,6 +314,7 @@ After deployment succeeds:
   ```
 
 - [ ] **Check logs**
+
   ```bash
   vercel logs
   # Should show successful requests
@@ -324,16 +334,16 @@ If all checkboxes are complete:
 ✅ No additional configuration needed  
 ✅ Ready to scale to production traffic  
 ✅ All features are functional  
-✅ Documentation is complete  
+✅ Documentation is complete
 
 ## 📞 Quick Help
 
-| Issue | Solution |
-|-------|----------|
-| Build fails | Run `npm run build` locally to debug |
-| API returns 404 | Verify environment variables in Vercel |
-| Frontend not loading | Check vercel.json routes |
-| WhatsApp messages fail | Check BuilderBot credentials |
+| Issue                  | Solution                               |
+| ---------------------- | -------------------------------------- |
+| Build fails            | Run `npm run build` locally to debug   |
+| API returns 404        | Verify environment variables in Vercel |
+| Frontend not loading   | Check vercel.json routes               |
+| WhatsApp messages fail | Check BuilderBot credentials           |
 
 ## Next Steps
 
