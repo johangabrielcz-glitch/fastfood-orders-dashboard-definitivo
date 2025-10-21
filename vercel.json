@@ -1,31 +1,23 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/spa",
   "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": "dist/spa",
   "env": {
     "BUILDERBOT_BOT_ID": "5d54ab94-3dae-4d5f-887e-0f3a2983c295",
     "BUILDERBOT_API_KEY": "bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb"
   },
   "functions": {
     "api/index.ts": {
+      "runtime": "nodejs20.x",
       "memory": 1024,
-      "maxDuration": 30,
-      "runtime": "vercel-nodejs@20.0.0"
+      "maxDuration": 30
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/index.ts",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
+      "dest": "/api/index.ts"
     },
     {
       "src": "/(.*)",
