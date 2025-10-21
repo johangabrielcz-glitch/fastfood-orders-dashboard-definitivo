@@ -38,10 +38,18 @@ export function createServer() {
   app.patch("/api/pedidos/:id", updatePedido);
   app.delete("/api/pedidos/:id", deletePedido);
 
-  // ✅ FIX: compatibilidad con Express 5 — usar RegExp en lugar de "*"
-  app.get(/.*/, (_req, res) => {
-    res.sendFile(path.join(__dirname, "../../dist/spa/index.html"));
-  });
+  // In production, serve the SPA fallback for non-API routes
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.join(__dirname, "../../dist/spa");
+
+    // Serve static files
+    app.use(express.static(distPath));
+
+    // SPA fallback: serve index.html for all non-API routes
+    app.get(/.*/, (_req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
 
   return app;
 }
