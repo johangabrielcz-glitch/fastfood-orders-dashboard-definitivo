@@ -1,7 +1,7 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "installCommand": "npm install",
   "outputDirectory": "dist/spa",
   "env": {
     "BUILDERBOT_BOT_ID": "5d54ab94-3dae-4d5f-887e-0f3a2983c295",
