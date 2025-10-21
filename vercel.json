@@ -2,14 +2,14 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "dist/spa",
+  "outputDirectory": "dist",
   "env": {
     "BUILDERBOT_BOT_ID": "5d54ab94-3dae-4d5f-887e-0f3a2983c295",
     "BUILDERBOT_API_KEY": "bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb"
   },
   "functions": {
     "api/index.ts": {
-      "memory": 1024,
+      "runtime": "nodejs20.x",
       "maxDuration": 30
     }
   },
