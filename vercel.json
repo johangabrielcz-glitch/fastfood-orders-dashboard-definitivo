@@ -4,8 +4,8 @@
   "outputDirectory": "dist/spa",
   "installCommand": "pnpm install --frozen-lockfile",
   "env": {
-    "BUILDERBOT_BOT_ID": "@builderbot_bot_id",
-    "BUILDERBOT_API_KEY": "@builderbot_api_key"
+    "BUILDERBOT_BOT_ID": "5d54ab94-3dae-4d5f-887e-0f3a2983c295",
+    "BUILDERBOT_API_KEY": "bb-9782f9c9-10eb-4274-9e89-9bf0a36eedcb"
   },
   "functions": {
     "api/index.ts": {
