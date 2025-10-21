@@ -1,7 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:client && npm run build:vercel",
   "outputDirectory": "dist/spa",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "nodeVersion": "20.x",
   "env": {
     "BUILDERBOT_BOT_ID": "@builderbot_bot_id",
     "BUILDERBOT_API_KEY": "@builderbot_api_key"
@@ -17,18 +19,19 @@
     {
       "src": "/api/(.*)",
       "dest": "/api/index.ts",
-      "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"]
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
       "dest": "/index.html",
       "status": 200
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
     }
   ]
 }
