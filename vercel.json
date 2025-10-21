@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/spa",
+  "env": {
+    "BUILDERBOT_BOT_ID": "@builderbot_bot_id",
+    "BUILDERBOT_API_KEY": "@builderbot_api_key"
+  },
+  "functions": {
+    "api/index.ts": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "runtime": "nodejs20.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.ts",
+      "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html",
+      "status": 200
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    }
+  ]
+}
